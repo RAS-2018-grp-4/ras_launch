@@ -10,13 +10,19 @@
   </node>
 
 
-<!--
-     <node pkg="ras_keyboard_control" type="motor_controller_copy.py" name="motor_controller">
+<!-- -->
+
+     <node pkg="ras_keyboard_control" type="motor_controller.py" name="motor_controller">
   </node>
 
-     <node pkg="ras_odom_publisher" type="odom_publisher.py" name="odom_publisher">
+<!--     <node pkg="ras_odom_publisher" type="odom_publisher.py" name="odom_publisher">
+  </node> -->
+
+<!--
+       <node pkg="ras_keyboard_control" type="path_follower.py" name="path_follower">
   </node>
 -->
+
      <node pkg="ras_robot_tf" type="tf_broadcaster" name="tf_broadcaster">
   </node>
 
@@ -29,16 +35,16 @@
 
   <node pkg="tf" type="static_transform_publisher" name="base_2_camera" args="0.1 0 0.2 -0.5 -0.5 0.5 0.5 /base_link /camera_link 100" />
 
-  <arg name="map_file" default="lab_maze_2017.txt" />
-  <arg name="x_offset" default="0.2"/>
-  <arg name="y_offset" default="0.2"/>
+  <arg name="map_file" default="lab_maze_2018.txt" />
+  <arg name="x_offset" default="0.0"/>
+  <arg name="y_offset" default="0.0"/>
   <arg name="theta_offset" default="0.0"/>
 
-  <!-- load the world node -->
+  <!-- load the world node-->
   <node pkg="ras_grid_map" type="maze_map_node" name="maze_map_node"  >
 	 <param name="map_file" value="$(find ras_grid_map)/maps/$(arg map_file)"/>
   </node>
-
+ 
   
   <!-- publish the transform from odom to map frames -->
   <include file="$(find ras_grid_launch)/launch/static_tf.launch">
@@ -49,10 +55,28 @@
 
 
   <!-- launch realsense launch file -->
-  <include file="$(find realsense_camera)/launch/sr300_nodelet_rgbd.launch"> 
+<!--  -->
+
+<include file="$(find realsense_camera)/launch/sr300_nodelet_rgbd.launch"> 
   </include>
-  
-  <node pkg="ras_object_detection" type="ras_object_detection" name="ras_object_detection" />
+<!---->
+  <node pkg="object_detection_test" type="object_tf.py" name="object_tf"  />
+
+ 
+
+  <include file="$(find rplidar_ros)/launch/rplidar.launch"> 
+  </include>
+
+
+
+ <node pkg="object_detection_test" type="object_detection_test" name="object_detection_test" />
+
+ <!--<node pkg="object_saving" type="object_saving" name="object_saving" output="screen" /> -->
+
+
+<node pkg="arduino_servo_control" type="servo_control.py" name="servo_control" /> 
+
+<!-- <node pkg="arduino_servo_control" type="gripper.py" name="gripper" /> --> 
 
 <!-- run rviz -->
   <node pkg="rviz" type="rviz" name="rviz" args="-d $(find ras_project_launch)/maze.rviz" />
