@@ -1,0 +1,8 @@
+<launch>
+  <!-- launch realsense launch file -->
+  <include file="$(find realsense_camera)/launch/sr300_nodelet_rgbd.launch" />
+  
+<node pkg="rosbag" type="record" name="rosbag_record_camera"
+       args="record -o $(find ras_launch)/rosbags/rgbd_1.bag  /camera/depth_registered/sw_registered/image_rect /camera/rgb/image_rect_color"/>  
+
+</launch>
