@@ -1,0 +1,8 @@
+/pose/x: 0.2
+/pose/y: 0.2
+/pose/theta: 1.57
+
+/hsv/red/low: 21
+/hsv/red/up: 42
+/hsv/blue/low: 71
+/hsv/blue/up: 104

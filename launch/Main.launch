@@ -10,6 +10,8 @@
   </node>
 
 
+<rosparam command="load" file="/home/ras14/catkin_ws/src/ras_launch/param_server/param_server.yaml" />
+
 <!-- -->
 
      <node pkg="ras_keyboard_control" type="motor_controller.py" name="motor_controller">
@@ -33,15 +35,25 @@
 
   <node pkg="tf" type="static_transform_publisher" name="base_2_laser" args="0 0 0.2 0 0 0 1 /base_link /laser 100" />
 
-  <node pkg="tf" type="static_transform_publisher" name="base_2_camera" args="0.1 0 0.2 -0.5 -0.5 0.5 0.5 /base_link /camera_link 100" />
+<!--
+  <node pkg="tf" type="static_transform_publisher" name="base_2_camera" args="0.1 0 0.2 1.5708 0.0 -1.20 /base_link /camera_link 100" />
+  -->
 
-  <arg name="map_file" default="lab_maze_2017.txt" />
+  <node pkg="tf" type="static_transform_publisher" name="base_2_camera" args="0.1 0 0.2 4.71 0.0 4.34  /base_link /camera_link 100" />
+  
+  <!--<node pkg="tf" type="static_transform_publisher" name="depthoptical_2_rgboptical" args="0.03 0 0 0 0 0 1  camera_rgb_optical_frame camera_depth_optical_frame 100" />-->
+  
+  <!--
+    <node pkg="tf" type="static_transform_publisher" name="base_2_camera" args="0.1 0 0.2 -0.5 -0.5 0.5 0.5 /base_link /camera_link 100" />
+    -->
+
+  <arg name="map_file" default="lab_maze_2018_2.txt" />
   <arg name="x_offset" default="0.0"/>
   <arg name="y_offset" default="0.0"/>
   <arg name="theta_offset" default="0.0"/>
 
   <!-- load the world node-->
-  <node pkg="ras_grid_map" type="maze_map_node" name="maze_map_node"  >
+  <node pkg="ras_grid_map" type="maze_map_node" name="maze_map_node" output="screen"  >
 	 <param name="map_file" value="$(find ras_grid_map)/maps/$(arg map_file)"/>
   </node>
  
@@ -59,9 +71,9 @@
 
 <include file="$(find realsense_camera)/launch/sr300_nodelet_rgbd.launch"> 
   </include>
-<!---->
+
   <!--<node pkg="object_detection_test" type="object_tf_classical.py" name="object_tf_classical"  />-->
-  <node pkg="ras_object_detection_python" type="object_tf.py" name="object_tf"  />-->
+  <!--<node pkg="ras_object_detection_python" type="object_tf.py" name="object_tf"  />-->
 
  
 
