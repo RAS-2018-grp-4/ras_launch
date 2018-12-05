@@ -1,8 +1,46 @@
+/round: 1
+
+# INITIAL POSE
 /pose/x: 0.2
 /pose/y: 0.2
 /pose/theta: 1.57
+
+# MAUNAL TARGETS
+/t1x: 0.25 # ALWAYS NEEDED (IF PROBLEM; USE SAME AS INITIAL)
+/t1y: 1.7 # ALWAYS NEEDED
+
+/t2x: 0.3 # EDIT self.number_initial_target in explore.py to 0 if needed
+/t2y: 2.1
+
+/t3x: 0.3
+/t3y: 4.4
+
+/t4x: 2.0
+/t4y: 3.5
+
+/t5x: 1.2
+/t5y: 2.2
+
+/t6x: 2.0
+/t6y: 2.0
 
 /hsv/red/low: 21
 /hsv/red/up: 42
 /hsv/blue/low: 71
 /hsv/blue/up: 104
+
+/value_object_0_0: 10000 #Value of yellow ball
+/value_object_0_1: 1000 #Value of yellow cube
+/value_object_1_1: 1000 #Value of green cube
+/value_object_1_2: 1000 #Value of green cylinder
+/value_object_1_3: 100 #Value of green hollow cube
+/value_object_2_4: 100 #Value of orange cross
+/value_object_2_6: 5000 #Value of Patric
+/value_object_3_2: 1000 #Value of red cylinder
+/value_object_3_3: 100 #Value of red hollow cube
+/value_object_3_0: 10000 #Value of red ball
+/value_object_4_1: 1000 #Value of blue cube
+/value_object_4_5: 5000 #Value of blue triangle
+/value_object_5_4: 100 #Value of purple cross
+/value_object_5_6: 5000 #Value of purple star
+

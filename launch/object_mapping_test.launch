@@ -9,6 +9,8 @@
      <param name="name" value="right_motor"/>
   </node>
 
+  <rosparam command="load" file="/home/ras14/catkin_ws/src/ras_launch/param_server/param_server.yaml" />
+
 
   <!-- keyboard control node -->
 
@@ -22,10 +24,15 @@
   <!-- tf static from sensors to base link  -->
   <node pkg="tf" type="static_transform_publisher" name="base_2_laser" args="0 0 0.2 0 0 0 1 /base_link /laser 100" />
 
-  <node pkg="tf" type="static_transform_publisher" name="base_2_camera" args="0.1 0 0.2 -0.5 -0.5 0.5 0.5 /base_link /camera_link 100" />
+  
+  <!--<node pkg="tf" type="static_transform_publisher" name="base_2_camera" args="0.1 0 0.2 1.5708 0.0 -1.20 /base_link /camera_link 100" />
+  -->
+  <!-- <node pkg="tf" type="static_transform_publisher" name="base_2_camera" args="0.1 0 0.2 -0.5 -0.5 0.5 0.5 /base_link /camera_link 100" />  -->
+  <node pkg="tf" type="static_transform_publisher" name="base_2_camera" args="0.1 0 0.2 4.71 0.0 4.34  /base_link /camera_link 100" />
+  
 
-  <!-- loading maze node -->
-  <arg name="map_file" default="lab_maze_2017.txt" />
+<!--<arg name="map_file" default="contest_maze_2018.txt" />-->
+   <arg name="map_file" default="lab_maze_2018_2.txt" />
   <arg name="x_offset" default="0.0"/>
   <arg name="y_offset" default="0.0"/>
   <arg name="theta_offset" default="0.0"/>
@@ -34,7 +41,7 @@
   <node pkg="ras_grid_map" type="maze_map_node" name="maze_map_node"  >
 	 <param name="map_file" value="$(find ras_grid_map)/maps/$(arg map_file)"/>
   </node>
- 
+
   
   <!-- publish the transform from odom to map frames -->
   <include file="$(find ras_grid_launch)/launch/static_tf.launch">
@@ -48,8 +55,11 @@
   <include file="$(find realsense_camera)/launch/sr300_nodelet_rgbd.launch"> 
   </include>
 
+  <node pkg="ras_espeak" type="espeak_node" name="espeak_node"  />
+  
+
   <!-- launch object detection node -->
-  <node pkg="ras_object_detection_python" type="keras_object_detection_2.py" name="object_detection_python_node"  />
+  <node pkg="ras_object_detection_python" type="object+battery_detection_4.py" name="object_detection_python_node"  />
   <!--<node pkg="object_detection_test" type="object_detection_test" name="object_detection_test" />-->
  
   <!-- launch tf listener from cam link to base link for objects -->
